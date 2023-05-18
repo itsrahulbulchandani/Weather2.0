@@ -30,16 +30,33 @@ export default function App() {
       </View>
       <View style={styles.bottomPortion}>
         <View style={styles.dateCityData}>
-          <Text style={styles.cityName}>{apiResponse?.location?.name}</Text>
-          <Text style={styles.cityName}>
-            {moment(apiResponse?.location?.localtime).format("dddd,MMMM Do")}
-          </Text>
-          <Text style={styles.cityName}>{moment().format("hh:mm")}</Text>
-          <Text style={styles.cityName}>Feels like</Text>
-          <Text style={styles.cityName}>{apiResponse?.current?.feelslike_c}</Text>
-          <Text style={styles.cityName}>Humidity</Text>
-          <Text style={styles.cityName}>{apiResponse?.current?.humidity}</Text>
-          <Text></Text>
+          <View style={styles.cityNameView}>
+            <Text style={styles.cityName}>{apiResponse?.location?.name}</Text>
+          </View>
+          <View style={styles.horizontalLine}></View>
+          <View style={styles.dayDateView}>
+            <Text style={styles.dayDate}>
+              {moment(apiResponse?.location?.localtime).format("MMMM Do")}
+            </Text>
+          </View>
+          <View style={styles.currentTimeView}>
+            <Text style={styles.currentTime}>{moment().format("LT")}</Text>
+          </View>
+          <View style={styles.feelLikeAndHumidiyRow}>
+            <View style={styles.feelsLikeView}>
+              <Text style={styles.feelsLike}>Feels like</Text>
+              <Text style={styles.feelsLikeData}>
+                {apiResponse?.current?.feelslike_c} &#8451;
+              </Text>
+            </View>
+            <View style={styles.verticalLineMiddle}></View>
+            <View style={styles.humidityView}>
+              <Text style={styles.humidity}>Humidity</Text>
+              <Text style={styles.humidityData}>
+                {apiResponse?.current?.humidity}%
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -52,7 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   topPortion: {
-    flex: 4,
+    flex: 5,
     backgroundColor: "#ADD8E6",
   },
   bottomPortion: {
@@ -66,5 +83,71 @@ const styles = StyleSheet.create({
   },
   temperatureBoxText: {
     fontSize: 50,
+  },
+  dateCityData: {
+    flex: 1,
+    paddingTop: "10%",
+    paddingLeft: "15%",
+    paddingRight: "20%",
+  },
+  cityNameView: {
+    paddingBottom: "5%",
+  },
+  cityName: {
+    fontSize: 25,
+    fontWeight: 600,
+  },
+  horizontalLine: {
+    width: "45%",
+    height: "0.5%",
+    backgroundColor: "#909090",
+  },
+  verticalLine: {
+    height: "30%",
+    width: 1,
+    backgroundColor: "#909090",
+  },
+  dayDateView: {
+    paddingTop: "3%",
+  },
+  dayDate: {
+    fontSize: 35,
+    fontWeight: 300,
+  },
+  currentTimeView: {
+    paddingTop: "2%",
+  },
+  currentTime: {
+    fontSize: 15,
+    fontWeight: 300,
+  },
+  feelLikeAndHumidiyRow: {
+    paddingTop: "4%",
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+  },
+  feelsLikeView: {
+    flex: 3,
+    justifyContent: "flex-start",
+  },
+  humidityView: {
+    flex: 3,
+    paddingHorizontal: 10,
+    justifyContent: "flex-start",
+  },
+  feelsLike: {
+    fontSize: 18,
+    color: "gray",
+  },
+  verticalLineMiddle: {
+    height: "30%",
+    width: "1%",
+    backgroundColor: "#909090",
+  },
+  humidity: {
+    fontSize: 20,
+    color: "gray",
   },
 });
